@@ -1,4 +1,113 @@
 ---
+apiVersion: topologies.eda.nokia.com/v1alpha1
+kind: NetworkTopology
+metadata:
+  name: networktopology-72dfdd73-524d-44f8-bc72-646b616d2166
+  namespace: eda
+spec:
+  operation: create
+  nodeTemplates:
+    - name: leaf-node-template
+      nodeProfile: srlinux-ghcr-25.10.1
+      platform: 7220 IXR-D3L
+    - name: spine-node-template
+      nodeProfile: srlinux-ghcr-25.10.1
+      platform: 7220 IXR-D3L
+  nodes:
+    - labels:
+        eda.nokia.com/role: leaf
+      name: dc-1-leaf-1
+      onBoarded: false
+      template: leaf-node-template
+    - labels:
+        eda.nokia.com/role: leaf
+      name: dc-1-leaf-2
+      onBoarded: false
+      template: leaf-node-template
+    - labels:
+        eda.nokia.com/role: spine
+      name: dc-1-spine-1
+      onBoarded: false
+      template: spine-node-template
+  linkTemplates:
+    - encapType: dot1q
+      labels:
+        eda.nokia.com/role: interSwitch
+      name: isl-topolink-template
+      speed: 100G
+      type: interSwitch
+    - encapType: dot1q
+      labels:
+        eda.nokia.com/role: edge
+      name: edge-link-template
+      speed: 100G
+      type: edge
+  links:
+    - endpoints:
+        - local:
+            interface: ethernet-1-1
+            interfaceResource: dc-1-leaf-1-ethernet-1-1
+            node: dc-1-leaf-1
+          remote:
+            interface: ethernet-1-1
+            interfaceResource: dc-1-spine-1-ethernet-1-1
+            node: dc-1-spine-1
+          speed: 100G
+          type: interSwitch
+        - local:
+            interface: ethernet-1-1
+            interfaceResource: dc-2-leaf-2-ethernet-1-1
+            node: dc-1-leaf-2
+          remote:
+            interface: ethernet-1-2
+            interfaceResource: dc-1-spine-1-ethernet-1-2
+            node: dc-1-spine-1
+          speed: 100G
+          type: interSwitch
+      name: ethernet-leaf-1-spine-1
+      template: isl-topolink-template
+    - endpoints:
+        - local:
+            interface: ethernet-1-5
+            interfaceResource: dc-1-leaf-1-ethernet-1-5
+            node: dc-1-leaf-1
+          speed: 100G
+          type: edge
+        - local:
+            interface: ethernet-1-5
+            interfaceResource: dc-1-leaf-2-ethernet-1-5
+            node: dc-1-leaf-2
+          speed: 100G
+          type: edge
+      name: dc-1-leaf-1-edge
+      template: edge-link-template
+    - name: ethernet-leaf-2-spine-1
+      template: isl-topolink-template
+      endpoints:
+        - local:
+            node: dc-1-leaf-2
+            interfaceResource: dc-1-leaf-2-ethernet-1-1
+            interface: ethernet-1-1
+          type: interSwitch
+          speed: 100G
+          remote:
+            node: dc-1-spine-1
+            interfaceResource: dc-1-spine-2-ethernet-1-2
+            interface: ethernet-1-2
+    - name: dc-1-leaf-2
+      template: edge-link-template
+      endpoints:
+        - local:
+            node: dc-1-leaf-2
+            interfaceResource: dc-1-leaf-2-ethernet-1-5
+            interface: ethernet-1-5
+          type: edge
+          speed: 100G
+  checks:
+    dryRun: true
+
+
+---
 ##### Add Topolinks Edge
 apiVersion: core.eda.nokia.com/v1
 kind: TopoLink
@@ -1103,5 +1212,6 @@ metadata:
 spec:
   segments:
     - subnet: 55.1.0.0/16
+
 
 ---
