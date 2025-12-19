@@ -2,7 +2,7 @@
 apiVersion: topologies.eda.nokia.com/v1alpha1
 kind: NetworkTopology
 metadata:
-  name: networktopology-72dfdd73-524d-44f8-bc72-646b616d2166
+  name: 
   namespace: eda
 spec:
   operation: create
@@ -56,7 +56,7 @@ spec:
           type: interSwitch
         - local:
             interface: ethernet-1-1
-            interfaceResource: dc-2-leaf-2-ethernet-1-1
+            interfaceResource: dc-1-leaf-2-ethernet-1-1
             node: dc-1-leaf-2
           remote:
             interface: ethernet-1-2
@@ -1215,3 +1215,4 @@ spec:
 
 
 ---
+
