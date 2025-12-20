@@ -1,7 +1,7 @@
 apiVersion: topologies.eda.nokia.com/v1alpha1
 kind: NetworkTopology
 metadata:
-  name: networktopology-1acb5d83-d33d-4e3a-823f-46f43e6bbba0
+  name:
   namespace: eda
 spec:
   operation: replaceAll
