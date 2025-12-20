@@ -1,7 +1,7 @@
 apiVersion: topologies.eda.nokia.com/v1alpha1
 kind: NetworkTopology
 metadata:
-  name: networktopology-test-1
+  name: 
   namespace: eda
 spec:
   operation: create
