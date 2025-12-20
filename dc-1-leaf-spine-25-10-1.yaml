@@ -1,8 +1,3 @@
-apiVersion: topologies.eda.nokia.com/v1alpha1
-kind: NetworkTopology
-metadata:
-  name:
-  namespace: eda
 spec:
   operation: create
   nodeTemplates:
@@ -188,14 +183,14 @@ spec:
             node: leaf2
       name: leaf1-2-e1212
       template: edge
-  simulation:
-    simNodeTemplates:
-      - name: default
-        type: TestMan
-    simNodes:
-      - name: testman-default
-        template: default
-    topology:
-      - interface: '*'
-        node: '*'
-        simNode: testman-default
+#  simulation:
+#    simNodeTemplates:
+#      - name: default
+#        type: TestMan
+#    simNodes:
+#      - name: testman-default
+#        template: default
+#    topology:
+#      - interface: '*'
+#        node: '*'
+#        simNode: testman-default
